@@ -64,6 +64,7 @@ INSTALLED_APPS = [
     'users',
     'rolesToCertify',
     'students',
+    'record',
 
 ]
 
