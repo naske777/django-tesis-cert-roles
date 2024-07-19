@@ -21,7 +21,9 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('example.urls')),
     path('api/', include('users.url')),
-
+    path('record/', include('record.url')),
+    path('rolesToCertify/', include('rolesToCertify.url')),
+    path('students/', include('students.url')),
     # Swagger URLs
     path('swagger/', schema_view.with_ui('swagger', cache_timeout=0), name='schema-swagger-ui'),
     path('redoc/', schema_view.with_ui('redoc', cache_timeout=0), name='schema-redoc'),
