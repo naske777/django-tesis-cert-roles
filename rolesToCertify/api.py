@@ -4,7 +4,7 @@ from .models import *
 from .serializer import *
 
 
-class RolesToCertifyViewSet(viewsets.ModelViewSet):
-    queryset = RolesToCertify.objects.all()
-    serializer_class = RolesToCertifySerializer
+class RoleToCertifyViewSet(viewsets.ModelViewSet):
+    queryset = RoleToCertify.objects.all()
+    serializer_class = RoleToCertifySerializer
 

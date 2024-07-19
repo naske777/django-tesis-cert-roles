@@ -1,9 +1,6 @@
 from django.urls import path, include
 from rest_framework.routers import DefaultRouter
-from .views import (
-    RecordViewSet, TaskViewSet, EvaluationsViewSet,
-    GenericCompetenciesViewSet, SpecificCompetenciesViewSet, DiagnosisViewSet
-)
+from .api import *
 
 router = DefaultRouter()
 router.register(r'records', RecordViewSet)

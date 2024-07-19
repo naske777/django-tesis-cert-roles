@@ -5,6 +5,6 @@ from .serializer import *
 
 
 class StudentViewSet(viewsets.ModelViewSet):
-    queryset = Student.objects.all()
+    queryset = Students.objects.all()
     serializer_class = StudentSerializer
 

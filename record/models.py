@@ -7,7 +7,10 @@ class BaseEvaluationsTypes(models.TextChoices):
     REGULAR = 'regular', 'Regular'
     BAD = 'bad', 'Mal'
 
-class CompleteEvaluationsTypes(BaseEvaluationsTypes):
+class CompleteEvaluationsTypes(models.TextChoices):
+    GOOD = 'good', 'Bien'
+    REGULAR = 'regular', 'Regular'
+    BAD = 'bad', 'Mal'
     EXCELLENT = 'excellent', 'Excelente'
 
 class GradingScaleTypes(models.TextChoices):
@@ -24,14 +27,13 @@ class SpecificCompetenciesTypes(models.TextChoices):
 # Modelo Principal
 class Record(models.Model):
     proposedLvl = models.TextField()
-    student = models.ForeignKey('Students', on_delete=models.CASCADE, related_name='records')
-
+    students = models.ForeignKey('students.Students', on_delete=models.CASCADE, related_name='records')
 # Modelos Relacionados
 class Task(models.Model):
     name = models.TextField()
     endingDate = models.DateField()
-    complexity = models.CharField(max_length=5, choices=GradingScaleTypes.choices)
-    criticality = models.CharField(max_length=5, choices=GradingScaleTypes.choices)
+    complexity = models.CharField(max_length=6, choices=GradingScaleTypes.choices)
+    criticality = models.CharField(max_length=6, choices=GradingScaleTypes.choices)
     evaluation = models.CharField(max_length=9, choices=CompleteEvaluationsTypes.choices)
     evidence = models.TextField()
     observations = models.TextField()
@@ -47,7 +49,7 @@ class Evaluations(models.Model):
 
 class GenericCompetencies(models.Model): 
     name = models.TextField()
-    level = models.CharField(max_length=5, choices=GradingScaleTypes.choices)
+    level = models.CharField(max_length=6, choices=GradingScaleTypes.choices)
     record = models.ForeignKey(Record, on_delete=models.CASCADE, related_name='generic_competencies')
 
 class SpecificCompetencies(models.Model): 
@@ -55,7 +57,7 @@ class SpecificCompetencies(models.Model):
     description = models.TextField()
     evaluation = models.IntegerField(validators=[MinValueValidator(2), MaxValueValidator(5)])
     argumentation = models.TextField()
-    lvl = models.CharField(max_length=5, choices=SpecificCompetenciesTypes.choices)
+    lvl = models.CharField(max_length=18, choices=SpecificCompetenciesTypes.choices)
     record = models.ForeignKey(Record, on_delete=models.CASCADE, related_name='specific_competencies')
 
 class Diagnosis(models.Model): 

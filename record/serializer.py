@@ -1,7 +1,5 @@
 from rest_framework import serializers
-from .models import (
-    Record, Task, Evaluations, GenericCompetencies, SpecificCompetencies, Diagnosis
-)
+from .models import *
 
 class RecordSerializer(serializers.ModelSerializer):
     class Meta:

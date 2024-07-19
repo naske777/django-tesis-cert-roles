@@ -1,11 +1,7 @@
-from rest_framework import viewsets
-from .models import (
-    Record, Task, Evaluations, GenericCompetencies, SpecificCompetencies, Diagnosis
-)
-from .serializer import (
-    RecordSerializer, TaskSerializer, EvaluationsSerializer,
-    GenericCompetenciesSerializer, SpecificCompetenciesSerializer, DiagnosisSerializer
-)
+from rest_framework import viewsets, status
+from rest_framework.response import Response
+from .models import *
+from .serializer import *
 
 class RecordViewSet(viewsets.ModelViewSet):
     queryset = Record.objects.all()
