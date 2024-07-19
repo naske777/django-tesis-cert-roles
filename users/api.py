@@ -7,7 +7,7 @@ from rest_framework import status,viewsets
 from rest_framework.response import Response
 from .models import *
 from .serializer import *
-
+from django.contrib.auth.models import User
 
 class UserViewSet(viewsets.ModelViewSet):
     queryset = User.objects.all()

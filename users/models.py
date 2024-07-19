@@ -21,16 +21,3 @@ class UserManager(BaseUserManager):
 
         return self.create_user(username, password, **extra_fields)
 
-class User(AbstractBaseUser, PermissionsMixin):
-    username = models.TextField(unique=True)
-    role = models.CharField(max_length=10, choices=RoleType.choices)
-    is_active = models.BooleanField(default=True)
-    is_staff = models.BooleanField(default=False)
-
-    objects = UserManager()
-
-    USERNAME_FIELD = 'username'
-    REQUIRED_FIELDS = []
-
-    def __str__(self):
-        return self.username
