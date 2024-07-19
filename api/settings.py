@@ -62,6 +62,7 @@ INSTALLED_APPS = [
     'example',
     'drf_yasg',
     'users',
+    'rolesToCertify',
 
 ]
 
