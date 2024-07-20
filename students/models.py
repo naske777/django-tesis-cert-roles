@@ -20,5 +20,4 @@ class Students(models.Model):
     group = models.IntegerField()
     semester = models.CharField(max_length=1, choices=SemesterTypes.choices)
     stage = models.TextField()
-    roles = models.ManyToManyField('rolesToCertify.RoleToCertify', related_name='students')
-    
+    roles = models.ManyToManyField('rolesToCertify.RoleToCertify', related_name='students', blank=True)    
