@@ -3,7 +3,7 @@ from rest_framework.routers import DefaultRouter
 from .api import *
 
 router = DefaultRouter()
-router.register(r'records', RecordViewSet)
+router.register(r'', RecordViewSet)
 router.register(r'tasks', TaskViewSet)
 router.register(r'evaluations', EvaluationsViewSet)
 router.register(r'generic_competencies', GenericCompetenciesViewSet)

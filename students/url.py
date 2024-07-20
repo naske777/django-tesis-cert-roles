@@ -3,7 +3,7 @@ from rest_framework.routers import DefaultRouter
 from .api import *
 
 router = DefaultRouter()
-router.register(r'student', StudentViewSet)
+router.register(r'', StudentViewSet)
 
 urlpatterns = [
     path('', include(router.urls)),
