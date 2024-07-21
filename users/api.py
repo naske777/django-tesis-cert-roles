@@ -23,10 +23,12 @@ class LoginView(TokenObtainPairView):
         user = authenticate(username=username, password=password)
         if user is not None:
             refresh = RefreshToken.for_user(user)
+            user_profile = UserProfile.objects.get(user=user)
+
             return Response({
                 'access': str(refresh.access_token),
                 'id': user.id,
-                'role': UserProfile.role,  
+                'role': user_profile.role,  
             })
 
         else:
