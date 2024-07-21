@@ -1,11 +1,11 @@
 from django.db import models
 
 class FacultyTypes(models.TextChoices):
-    FACULTY1 = 'faculty1', 'Facultad 1'
-    FACULTY2 = 'faculty2', 'Facultad 2'
-    FACULTY3 = 'faculty3', 'Facultad 3'
-    FACULTY4 = 'faculty4', 'Facultad 4'
-    FTE = 'fte', 'FTE'
+    FACULTY1 = 'Facultad 1', 'Facultad 1'
+    FACULTY2 = 'Facultad 2', 'Facultad 2'
+    FACULTY3 = 'Facultad 3', 'Facultad 3'
+    FACULTY4 = 'Facultad 4', 'Facultad 4'
+    FTE = 'FTE', 'FTE'
 
 class SemesterTypes(models.TextChoices):
     UNO = '1', '1'
