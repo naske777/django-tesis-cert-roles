@@ -13,7 +13,7 @@ class SemesterTypes(models.TextChoices):
 
 class Students(models.Model):
     name = models.TextField()
-    solapin = models.TextField()
+    solapin = models.TextField(unique=True)
     faculty = models.CharField(max_length=10, choices=FacultyTypes.choices)
     center = models.TextField()
     year = models.IntegerField()
