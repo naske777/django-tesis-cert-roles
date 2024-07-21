@@ -12,7 +12,7 @@ class UserSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = User
-        fields = ['id', 'username','password', 'profile']
+        fields = ['id', 'username', 'profile']
 
     def create(self, validated_data):
         profile_data = validated_data.pop('profile')
@@ -25,7 +25,7 @@ class UserSerializer(serializers.ModelSerializer):
         profile = instance.profile
 
         instance.username = validated_data.get('username', instance.username)
-        instance.email = validated_data.get('email', instance.email)
+        instance.email = validated_data.get('password', instance.password)
         instance.save()
 
         profile.role = profile_data.get('role', profile.role)
