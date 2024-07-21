@@ -25,6 +25,9 @@ class LoginView(TokenObtainPairView):
             refresh = RefreshToken.for_user(user)
             return Response({
                 'access': str(refresh.access_token),
+                'id': user.id,
+                'role': user_profile.role,  
             })
+
         else:
             return Response({'error': 'Credenciales inválidas'}, status=status.HTTP_401_UNAUTHORIZED)
