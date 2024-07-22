@@ -89,6 +89,12 @@ MIDDLEWARE = [
 
 ]
 
+from datetime import timedelta
+
+# Configuración de SIMPLE_JWT
+SIMPLE_JWT = {
+    'ACCESS_TOKEN_LIFETIME': timedelta(days=1),
+}
 
 ROOT_URLCONF = 'api.urls'
 
