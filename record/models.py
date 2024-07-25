@@ -31,6 +31,7 @@ class Record(models.Model):
 # Modelos Relacionados
 class Task(models.Model):
     name = models.TextField()
+    startDate = models.DateField(null=True)
     endingDate = models.DateField()
     complexity = models.CharField(max_length=6, choices=GradingScaleTypes.choices)
     criticality = models.CharField(max_length=6, choices=GradingScaleTypes.choices)
