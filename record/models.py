@@ -1,6 +1,6 @@
 from django.db import models
 from django.core.validators import MinValueValidator, MaxValueValidator
-
+from students.models import Students
 # Clases de Enumeración (TextChoices)
 class BaseEvaluationsTypes(models.TextChoices):
     GOOD = 'good', 'Bien'
@@ -37,7 +37,7 @@ class Task(models.Model):
     evaluation = models.CharField(max_length=9, choices=CompleteEvaluationsTypes.choices)
     evidence = models.TextField()
     observations = models.TextField()
-    record = models.ForeignKey(Record, on_delete=models.CASCADE, related_name='tasks')
+    students = models.ForeignKey(Students, on_delete=models.CASCADE, related_name='tasks')
 
 class Evaluations(models.Model):
     performance = models.CharField(max_length=9, choices=CompleteEvaluationsTypes.choices)
@@ -45,20 +45,24 @@ class Evaluations(models.Model):
     regulation = models.CharField(max_length=9, choices=BaseEvaluationsTypes.choices)
     otherActivities = models.CharField(max_length=9, choices=CompleteEvaluationsTypes.choices)
     evaluation = models.CharField(max_length=9, choices=CompleteEvaluationsTypes.choices)
-    record = models.ForeignKey(Record, on_delete=models.CASCADE, related_name='evaluations')
+    students = models.ForeignKey(Students, on_delete=models.CASCADE, related_name='evaluations')
 
 class GenericCompetencies(models.Model): 
     name = models.TextField()
     level = models.CharField(max_length=6, choices=GradingScaleTypes.choices)
-    record = models.ForeignKey(Record, on_delete=models.CASCADE, related_name='generic_competencies')
+    students = models.ForeignKey(Students, on_delete=models.CASCADE, related_name='generic_competencies')
+
+class Competency(models.Model):
+    name = models.TextField()
+    level = models.CharField(max_length=18, choices=SpecificCompetenciesTypes.choices)
+    students = models.ForeignKey(Students, on_delete=models.CASCADE, related_name='competency')
 
 class SpecificCompetencies(models.Model): 
-    name = models.TextField()
+    competency = models.ForeignKey(Competency, on_delete=models.CASCADE, related_name='specific_competencies')
     description = models.TextField()
     evaluation = models.IntegerField(validators=[MinValueValidator(2), MaxValueValidator(5)])
     argumentation = models.TextField()
     lvl = models.CharField(max_length=18, choices=SpecificCompetenciesTypes.choices)
-    record = models.ForeignKey(Record, on_delete=models.CASCADE, related_name='specific_competencies')
 
 class Diagnosis(models.Model): 
     knowledge = models.TextField()
@@ -67,4 +71,4 @@ class Diagnosis(models.Model):
     preferValue = models.IntegerField(validators=[MinValueValidator(1), MaxValueValidator(5)])
     performedTime = models.IntegerField()  # in months
     rolKnowledge = models.TextField()
-    record = models.ForeignKey(Record, on_delete=models.CASCADE, related_name='diagnoses')
+    students = models.ForeignKey(Students, on_delete=models.CASCADE, related_name='diagnoses')

@@ -9,6 +9,7 @@ router.register(r'evaluations', EvaluationsViewSet)
 router.register(r'generic_competencies', GenericCompetenciesViewSet)
 router.register(r'specific_competencies', SpecificCompetenciesViewSet)
 router.register(r'diagnoses', DiagnosisViewSet)
+router.register(r'competency', CompetencyViewSet)
 
 urlpatterns = [
     path('', include(router.urls)),

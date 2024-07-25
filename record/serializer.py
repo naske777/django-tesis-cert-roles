@@ -25,6 +25,11 @@ class SpecificCompetenciesSerializer(serializers.ModelSerializer):
     class Meta:
         model = SpecificCompetencies
         fields = '__all__'
+        
+class CompetencySerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Competency
+        fields = '__all__'
 
 class DiagnosisSerializer(serializers.ModelSerializer):
     class Meta:
