@@ -1,6 +1,6 @@
 from django.contrib.auth.models import User
 from django.db import models
-
+from students.models import Students
 class RoleType(models.TextChoices):
     ADMIN = 'adm', 'Administrador'
     TUTOR = 'tutor', 'Tutor'
@@ -13,7 +13,7 @@ class UserProfile(models.Model):
         choices=RoleType.choices,
         default=RoleType.STUDENT
     )
-
+    student = models.OneToOneField(Students, on_delete=models.CASCADE, null=True, blank=True)
     def __str__(self):
         return f"{self.user.username} - {self.get_role_display()}"
 
