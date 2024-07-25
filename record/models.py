@@ -27,7 +27,7 @@ class SpecificCompetenciesTypes(models.TextChoices):
 # Modelo Principal
 class Record(models.Model):
     proposedLvl = models.TextField()
-    students = models.ForeignKey('students.Students', on_delete=models.CASCADE, related_name='records')
+    students = models.ForeignKey(Students, on_delete=models.CASCADE, related_name='records',null=True)
 # Modelos Relacionados
 class Task(models.Model):
     name = models.TextField()
@@ -37,7 +37,7 @@ class Task(models.Model):
     evaluation = models.CharField(max_length=9, choices=CompleteEvaluationsTypes.choices)
     evidence = models.TextField()
     observations = models.TextField()
-    students = models.ForeignKey(Students, on_delete=models.CASCADE, related_name='tasks')
+    students = models.ForeignKey(Students, on_delete=models.CASCADE, related_name='tasks',null=True)
 
 class Evaluations(models.Model):
     performance = models.CharField(max_length=9, choices=CompleteEvaluationsTypes.choices)
@@ -45,20 +45,20 @@ class Evaluations(models.Model):
     regulation = models.CharField(max_length=9, choices=BaseEvaluationsTypes.choices)
     otherActivities = models.CharField(max_length=9, choices=CompleteEvaluationsTypes.choices)
     evaluation = models.CharField(max_length=9, choices=CompleteEvaluationsTypes.choices)
-    students = models.ForeignKey(Students, on_delete=models.CASCADE, related_name='evaluations')
+    students = models.ForeignKey(Students, on_delete=models.CASCADE, related_name='evaluations',null=True)
 
 class GenericCompetencies(models.Model): 
     name = models.TextField()
     level = models.CharField(max_length=6, choices=GradingScaleTypes.choices)
-    students = models.ForeignKey(Students, on_delete=models.CASCADE, related_name='generic_competencies')
+    students = models.ForeignKey(Students, on_delete=models.CASCADE, related_name='generic_competencies',null=True)
 
 class Competency(models.Model):
     name = models.TextField()
     level = models.CharField(max_length=18, choices=SpecificCompetenciesTypes.choices)
-    students = models.ForeignKey(Students, on_delete=models.CASCADE, related_name='competency')
+    students = models.ForeignKey(Students, on_delete=models.CASCADE, related_name='competency',null=True)
 
 class SpecificCompetencies(models.Model): 
-    competency = models.ForeignKey(Competency, on_delete=models.CASCADE, related_name='specific_competencies')
+    competency = models.ForeignKey(Competency, on_delete=models.CASCADE, related_name='specific_competencies',null=True)
     description = models.TextField()
     evaluation = models.IntegerField(validators=[MinValueValidator(2), MaxValueValidator(5)])
     argumentation = models.TextField()
@@ -71,4 +71,4 @@ class Diagnosis(models.Model):
     preferValue = models.IntegerField(validators=[MinValueValidator(1), MaxValueValidator(5)])
     performedTime = models.IntegerField()  # in months
     rolKnowledge = models.TextField()
-    students = models.ForeignKey(Students, on_delete=models.CASCADE, related_name='diagnoses')
+    students = models.ForeignKey(Students, on_delete=models.CASCADE, related_name='diagnoses',null=True)
