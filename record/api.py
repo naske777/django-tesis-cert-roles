@@ -23,13 +23,12 @@ class TaskViewSet(viewsets.ModelViewSet):
     queryset = Task.objects.all()
     serializer_class = TaskSerializer
     permission_classes = [IsAuthenticated]
-
     def get_queryset(self):
         queryset = super().get_queryset()
         student_id = self.request.query_params.get('studentId', None)
         role_id = self.request.query_params.get('roleId', None)
         if student_id and role_id:
-            queryset = queryset.filter(Task_student=student_id, Task_role=role_id)
+            queryset = queryset.filter(students_id=student_id, role_id=role_id)
         return queryset
 
 class EvaluationsViewSet(viewsets.ModelViewSet):
