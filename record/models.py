@@ -4,26 +4,26 @@ from students.models import Students
 from rolesToCertify.models import RoleToCertify
 # Clases de Enumeración (TextChoices)
 class BaseEvaluationsTypes(models.TextChoices):
-    GOOD = 'good', 'Bien'
-    REGULAR = 'regular', 'Regular'
-    BAD = 'bad', 'Mal'
+    GOOD = 'Bien', 'Bien'
+    REGULAR = 'Regular', 'Regular'
+    BAD = 'Mal', 'Mal'
 
 class CompleteEvaluationsTypes(models.TextChoices):
-    GOOD = 'good', 'Bien'
-    REGULAR = 'regular', 'Regular'
-    BAD = 'bad', 'Mal'
-    EXCELLENT = 'excellent', 'Excelente'
+    GOOD = 'Bien', 'Bien'
+    REGULAR = 'Regular', 'Regular'
+    BAD = 'Mal', 'Mal'
+    EXCELLENT = 'Excelente', 'Excelente'
 
 class GradingScaleTypes(models.TextChoices):
-    HIGHT = 'hight', 'Alto'
-    MEDIUM = 'medium', 'Medio'
-    LOW = 'low', 'Bajo'
+    HIGHT = 'Alto', 'Alto'
+    MEDIUM = 'Medio', 'Medio'
+    LOW = 'Bajo', 'Bajo'
 
 class SpecificCompetenciesTypes(models.TextChoices):
-    NOT_DEVELOPED = 'not_developed', 'No desarrollada'
-    LOW_DEVELOPMENT = 'low_development', 'Bajo desarrollo'
-    MEDIUM_DEVELOPMENT = 'medium_development', 'Desarrollo medio'
-    DEVELOPED = 'developed', 'Desarrollada'
+    NOT_DEVELOPED = 'No desarrollada', 'No desarrollada'
+    LOW_DEVELOPMENT = 'Bajo desarrollo', 'Bajo desarrollo'
+    MEDIUM_DEVELOPMENT = 'Desarrollo medio', 'Desarrollo medio'
+    DEVELOPED = 'Desarrollada', 'Desarrollada'
 
 class Record(models.Model):
     proposedLvl = models.TextField()
