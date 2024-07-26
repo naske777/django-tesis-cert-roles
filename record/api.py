@@ -16,7 +16,7 @@ class RecordViewSet(viewsets.ModelViewSet):
         student_id = self.request.query_params.get('studentId', None)
         role_id = self.request.query_params.get('roleId', None)
         if student_id and role_id:
-            queryset = queryset.filter(student_id=student_id, roles__id=role_id)
+            queryset = queryset.filter(students_id=student_id, role_id=role_id)
         return queryset
 
 class TaskViewSet(viewsets.ModelViewSet):
@@ -29,7 +29,7 @@ class TaskViewSet(viewsets.ModelViewSet):
         student_id = self.request.query_params.get('studentId', None)
         role_id = self.request.query_params.get('roleId', None)
         if student_id and role_id:
-            queryset = queryset.filter(student_id=student_id, roles__id=role_id)
+            queryset = queryset.filter(students_id=student_id, role_id=role_id)
         return queryset
 
 class EvaluationsViewSet(viewsets.ModelViewSet):
@@ -42,7 +42,7 @@ class EvaluationsViewSet(viewsets.ModelViewSet):
         student_id = self.request.query_params.get('studentId', None)
         role_id = self.request.query_params.get('roleId', None)
         if student_id and role_id:
-            queryset = queryset.filter(student_id=student_id, roles__id=role_id)
+            queryset = queryset.filter(students_id=student_id, role_id=role_id)
         return queryset
 
 class GenericCompetenciesViewSet(viewsets.ModelViewSet):
@@ -55,7 +55,7 @@ class GenericCompetenciesViewSet(viewsets.ModelViewSet):
         student_id = self.request.query_params.get('studentId', None)
         role_id = self.request.query_params.get('roleId', None)
         if student_id and role_id:
-            queryset = queryset.filter(student_id=student_id, roles__id=role_id)
+            queryset = queryset.filter(students_id=student_id, role_id=role_id)
         return queryset
 
 class CompetencyViewSet(viewsets.ModelViewSet):
@@ -67,9 +67,8 @@ class CompetencyViewSet(viewsets.ModelViewSet):
         queryset = super().get_queryset()
         student_id = self.request.query_params.get('studentId', None)
         role_id = self.request.query_params.get('roleId', None)
-
         if student_id and role_id:
-            queryset = queryset.filter(student_id=student_id, roles__id=role_id)
+            queryset = queryset.filter(students_id=student_id, role_id=role_id)
         return queryset
 
 class SpecificCompetenciesViewSet(viewsets.ModelViewSet):
@@ -81,7 +80,7 @@ class SpecificCompetenciesViewSet(viewsets.ModelViewSet):
         queryset = super().get_queryset()
         competency_id = self.request.query_params.get('competencyId', None)
         if competency_id:
-            queryset = queryset.filter(competency__id=competency_id)
+            queryset = queryset.filter(competency_id=competency_id)
         return queryset
 
 class DiagnosisViewSet(viewsets.ModelViewSet):
@@ -94,5 +93,5 @@ class DiagnosisViewSet(viewsets.ModelViewSet):
         student_id = self.request.query_params.get('studentId', None)
         role_id = self.request.query_params.get('roleId', None)
         if student_id and role_id:
-            queryset = queryset.filter(student_id=student_id, roles__id=role_id)
+            queryset = queryset.filter(students_id=student_id, role_id=role_id)
         return queryset
