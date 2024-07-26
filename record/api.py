@@ -29,7 +29,7 @@ class TaskViewSet(viewsets.ModelViewSet):
         student_id = self.request.query_params.get('studentId', None)
         role_id = self.request.query_params.get('roleId', None)
         if student_id and role_id:
-            queryset = queryset.filter(students_id=student_id, role_id=role_id)
+            queryset = queryset.filter(Task_student=student_id, Task_role=role_id)
         return queryset
 
 class EvaluationsViewSet(viewsets.ModelViewSet):
