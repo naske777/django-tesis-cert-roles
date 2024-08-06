@@ -2,6 +2,7 @@ from django.db import models
 from django.core.validators import MinValueValidator, MaxValueValidator
 from students.models import Students
 from rolesToCertify.models import RoleToCertify
+
 # Clases de Enumeración (TextChoices)
 class BaseEvaluationsTypes(models.TextChoices):
     GOOD = 'Bien', 'Bien'
@@ -74,8 +75,8 @@ class SpecificCompetencies(models.Model):
 
 class Diagnosis(models.Model): 
     knowledge = models.TextField()
-    isPreferRole = models.BooleanField()
-    isPerformedRole = models.BooleanField()
+    isPreferRole = models.BooleanField(default=False, blank=True)
+    isPerformedRole = models.BooleanField(default=False, blank=True)
     preferValue = models.IntegerField(validators=[MinValueValidator(1), MaxValueValidator(5)])
     performedTime = models.IntegerField()  # in months
     rolKnowledge = models.TextField()
