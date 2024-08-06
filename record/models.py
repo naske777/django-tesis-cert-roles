@@ -43,6 +43,7 @@ class Task(models.Model):
     role = models.ForeignKey(RoleToCertify, on_delete=models.CASCADE, related_name='task_roles', null=True)
 
 class Evaluations(models.Model):
+    date = models.DateField(null=True)
     performance = models.CharField(max_length=9, choices=CompleteEvaluationsTypes.choices)
     workday = models.CharField(max_length=9, choices=BaseEvaluationsTypes.choices)
     regulation = models.CharField(max_length=9, choices=BaseEvaluationsTypes.choices)
