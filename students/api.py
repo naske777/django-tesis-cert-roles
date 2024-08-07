@@ -10,3 +10,14 @@ class StudentViewSet(viewsets.ModelViewSet):
     queryset = Students.objects.all()
     serializer_class = StudentSerializer
 
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        order = self.request.query_params.get('order', None)
+        order_by = self.request.query_params.get('order_by', 'asc')
+
+        if order:
+            if order_by == 'desc':
+                order = f'-{order}'
+            queryset = queryset.order_by(order)
+
+        return queryset
