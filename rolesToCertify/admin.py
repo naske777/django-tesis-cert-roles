@@ -2,7 +2,7 @@ from django.contrib import admin
 from .models import RoleToCertify
 
 class RoleToCertifyAdmin(admin.ModelAdmin):
-    list_display = ('name')  # Reemplaza con los nombres de los campos de tu modelo
+    list_display = ('name',)  # Corrected to be a tuple
 
-# Registra el modelo RoleToCertify en el sitio administrativo con la clase ModelAdmin
+# Register the model RoleToCertify with the admin site using the ModelAdmin class
 admin.site.register(RoleToCertify, RoleToCertifyAdmin)
