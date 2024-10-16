@@ -3,5 +3,4 @@ from .models import RoleToCertify
 
 @admin.register(RoleToCertify)
 class RoleToCertifyAdmin(admin.ModelAdmin):
-    pass
-
+    list_display = ('name',) 
