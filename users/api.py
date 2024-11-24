@@ -1,17 +1,25 @@
 from django.contrib.auth import authenticate
 from rest_framework_simplejwt.views import TokenObtainPairView
 from rest_framework_simplejwt.tokens import RefreshToken
-from rest_framework.permissions import AllowAny
+from rest_framework.permissions import AllowAny, IsAuthenticated
 from rest_framework import status, viewsets
 from rest_framework.response import Response
 from .models import UserProfile
 from .serializers import UserSerializer
 from django.contrib.auth.models import User
-from rest_framework.permissions import IsAuthenticated
 
 class UserViewSet(viewsets.ModelViewSet):
     queryset = User.objects.all()
     serializer_class = UserSerializer
+
+    def get_permissions(self):
+        """
+        - POST (crear): Permitir a cualquiera
+        - Otros métodos: Requerir autenticación
+        """
+        if self.action == 'create':
+            return [AllowAny()]
+        return [IsAuthenticated()]
 
 class LoginView(TokenObtainPairView):
     permission_classes = (AllowAny,)
