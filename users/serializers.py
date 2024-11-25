@@ -9,14 +9,14 @@ class UserProfileSerializer(serializers.ModelSerializer):
 
 class UserSerializer(serializers.ModelSerializer):
     password = serializers.CharField(write_only=True)
-    profile = UserProfileSerializer()
+    profile = UserProfileSerializer(required=False)  # Hacer opcional
 
     class Meta:
         model = User
         fields = ['id', 'username', 'password', 'profile']
 
     def create(self, validated_data):
-        profile_data = validated_data.pop('profile')
+        profile_data = validated_data.pop('profile', {'role': 'student'})  # Valor por defecto
         user = User.objects.create_user(
             username=validated_data['username'],
             password=validated_data['password']
