@@ -1,6 +1,6 @@
 from rest_framework import serializers
 from django.contrib.auth.models import User
-from .models import UserProfile
+from .models import UserProfile, Students
 
 class UserProfileSerializer(serializers.ModelSerializer):
     class Meta:
@@ -9,25 +9,30 @@ class UserProfileSerializer(serializers.ModelSerializer):
 
 class UserSerializer(serializers.ModelSerializer):
     password = serializers.CharField(write_only=True)
-    profile = UserProfileSerializer(required=False)  # Hacer opcional
+    student = serializers.PrimaryKeyRelatedField(
+        queryset=Students.objects.all(),
+        required=False,
+        write_only=True
+    )
 
     class Meta:
         model = User
-        fields = ['id', 'username', 'password', 'profile']
+        fields = ['id', 'username', 'password', 'student']
 
     def create(self, validated_data):
-        profile_data = validated_data.pop('profile', {'role': 'student'})  # Valor por defecto
+        student = validated_data.pop('student', None)
+        
         # Crear usuario
         user = User.objects.create_user(
             username=validated_data['username'],
             password=validated_data['password']
         )
-        # El perfil se crea automáticamente por la señal en signals.py
-        # Solo actualizamos los datos del perfil
-        if profile_data:
-            for key, value in profile_data.items():
-                setattr(user.profile, key, value)
+
+        # Asignar estudiante si se proporcionó
+        if student:
+            user.profile.student = student
             user.profile.save()
+            
         return user
 
     def update(self, instance, validated_data):
