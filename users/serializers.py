@@ -17,11 +17,17 @@ class UserSerializer(serializers.ModelSerializer):
 
     def create(self, validated_data):
         profile_data = validated_data.pop('profile', {'role': 'student'})  # Valor por defecto
+        # Crear usuario
         user = User.objects.create_user(
             username=validated_data['username'],
             password=validated_data['password']
         )
-        UserProfile.objects.create(user=user, **profile_data)
+        # El perfil se crea automáticamente por la señal en signals.py
+        # Solo actualizamos los datos del perfil
+        if profile_data:
+            for key, value in profile_data.items():
+                setattr(user.profile, key, value)
+            user.profile.save()
         return user
 
     def update(self, instance, validated_data):
