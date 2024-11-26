@@ -3,7 +3,7 @@ from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated, AllowAny
 from .models import *
 from .serializer import *
-
+from users.models import UserProfile
 
 class StudentViewSet(viewsets.ModelViewSet):
     queryset = Students.objects.all()
