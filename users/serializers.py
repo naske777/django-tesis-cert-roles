@@ -33,8 +33,8 @@ class UserSerializer(serializers.ModelSerializer):
             user.profile.student = student
             user.profile.save()
             
-        return user
-
+        return User.objects.select_related('profile__student').get(id=user.id)
+    
     def update(self, instance, validated_data):
         profile_data = validated_data.pop('profile')
         profile = instance.profile
