@@ -36,7 +36,7 @@ class LoginView(TokenObtainPairView):
                 'access': str(refresh.access_token),
                 'userId': user.id,
                 'role': user_profile.role,
-                'studentId': user_profile.student.id if user_profile.student else None
+                'studentId': user_profile.student if user_profile.student else None
             })
 
         else:
