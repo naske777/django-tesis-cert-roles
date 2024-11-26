@@ -14,6 +14,7 @@ class UserProfile(models.Model):
         default=RoleType.STUDENT
     )
     student = models.OneToOneField(Students, on_delete=models.CASCADE, null=True, blank=True)
+    tutor_students = models.ManyToManyField(Students, related_name='tutors', blank=True)
     def __str__(self):
         return f"{self.user.username} - {self.get_role_display()}"
 
