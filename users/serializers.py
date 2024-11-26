@@ -19,21 +19,28 @@ class UserSerializer(serializers.ModelSerializer):
         model = User
         fields = ['id', 'username', 'password', 'student']
 
-    def create(self, validated_data):
-        student = validated_data.pop('student', None)
-        
+def create(self, validated_data):
+    from django.db import transaction
+    
+    student = validated_data.pop('student', None)
+    
+    with transaction.atomic():
         # Crear usuario
         user = User.objects.create_user(
             username=validated_data['username'],
             password=validated_data['password']
         )
-
-        # Asignar estudiante si se proporcionó
+        
+        # Obtener o crear el perfil
+        profile = UserProfile.objects.get_or_create(user=user)[0]
+        
+        # Si hay estudiante, actualizar el perfil
         if student:
-            user.profile.student = student
-            user.profile.save()
-            
-        return User.objects.select_related('profile__student').get(id=user.id)
+            profile.student = student
+            profile.role = 'student'  # Aseguramos que el rol sea estudiante
+            profile.save()
+        
+        return user,profile
     
     def update(self, instance, validated_data):
         profile_data = validated_data.pop('profile')
