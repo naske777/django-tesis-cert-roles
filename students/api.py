@@ -1,14 +1,22 @@
 from rest_framework import viewsets, status
 from rest_framework.response import Response
-from rest_framework.permissions import IsAuthenticated
+from rest_framework.permissions import IsAuthenticated, AllowAny
 from .models import *
 from .serializer import *
 
 
 class StudentViewSet(viewsets.ModelViewSet):
-    permission_classes = [IsAuthenticated]
     queryset = Students.objects.all()
     serializer_class = StudentSerializer
+
+    def get_permissions(self):
+        """
+        - POST (create): Allow anyone
+        - Other methods: Require JWT authentication
+        """
+        if self.action == 'create':
+            return [AllowAny()]
+        return [IsAuthenticated()]
 
     def get_queryset(self):
         queryset = super().get_queryset()
