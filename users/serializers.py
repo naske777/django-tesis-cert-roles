@@ -14,6 +14,12 @@ class UserSerializer(serializers.ModelSerializer):
         required=False,
         write_only=True
     )
+    tutor_students = serializers.PrimaryKeyRelatedField(
+        queryset=Students.objects.all(),
+        many=True,
+        required=False,
+        write_only=True
+    )
 
     class Meta:
         model = User
